@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "portfolio")
 public class Portfolio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +21,11 @@ public class Portfolio {
 
     @ManyToOne
     @JoinColumn(name = "sales_user_id")
-    private MasterUsers salesUserId;
+    private PlatformUsers salesUserId;
 
     @ManyToOne
     @JoinColumn(name = "assigned_by")
-    private MasterUsers assignedBy;
+    private PlatformUsers assignedBy;
 
     @Column(name = "is_active")
     private boolean isActive;

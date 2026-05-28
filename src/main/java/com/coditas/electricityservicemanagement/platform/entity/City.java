@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "city")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +24,5 @@ public class City {
 
     @ManyToOne
     @JoinColumn(name = "city_head_id")
-    private MasterUsers cityHead;
+    private PlatformUsers cityHead;
 }

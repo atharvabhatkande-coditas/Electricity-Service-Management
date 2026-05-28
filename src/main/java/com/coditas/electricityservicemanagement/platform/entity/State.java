@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "state")
 public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +20,5 @@ public class State {
 
     @ManyToOne
     @JoinColumn(name = "state_head_id")
-    private MasterUsers stateHead;
+    private PlatformUsers stateHead;
 }
