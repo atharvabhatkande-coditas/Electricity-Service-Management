@@ -1,5 +1,7 @@
-package com.coditas.electricityservicemanagement.platform.entity;
+package com.coditas.electricityservicemanagement.tenant.entity;
 
+import com.coditas.electricityservicemanagement.platform.entity.PlatformUsers;
+import com.coditas.electricityservicemanagement.platform.entity.State;
 import jakarta.persistence.*;
 import lombok.*;
 

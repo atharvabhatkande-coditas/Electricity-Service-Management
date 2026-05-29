@@ -9,5 +9,6 @@ public enum RoleType {
     CITY_HEAD,
     TECHNICIAN,
     BILLER,
-    CRM_AGENT
+    CRM_AGENT,
+    CUSTOMER
 }

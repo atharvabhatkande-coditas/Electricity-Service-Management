@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "tenant")
 public class Tenant {
 
     @Id
@@ -24,6 +25,6 @@ public class Tenant {
 
     @ManyToOne
     @JoinColumn(name = "onboarded_by")
-    private MasterUsers onboardedBy;
+    private PlatformUsers onboardedBy;
 
 }

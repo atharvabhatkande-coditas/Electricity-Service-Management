@@ -1,4 +1,4 @@
-package com.coditas.electricityservicemanagement.platform.entity;
+package com.coditas.electricityservicemanagement.tenant.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,16 +9,15 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "state")
-public class State {
+@Table(name = "meter_type")
+public class MeterType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    @Column(name = "state_name")
+    @Column(name = "meter_name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "state_head_id")
-    private PlatformUsers stateHead;
+    @Column(name = "description")
+    private String description;
 }

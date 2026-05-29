@@ -1,5 +1,6 @@
-package com.coditas.electricityservicemanagement.platform.entity;
+package com.coditas.electricityservicemanagement.tenant.entity;
 
+import com.coditas.electricityservicemanagement.platform.entity.City;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +24,5 @@ public class Area {
     private City city;
 
     @Column(name = "pincode")
-    private String pincode;
+    private Integer pincode;
 }
