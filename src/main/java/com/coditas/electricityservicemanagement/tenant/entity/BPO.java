@@ -17,7 +17,7 @@ public class BPO {
 
     @ManyToOne
     @JoinColumn(name = "state_id")
-    private State state;
+    private TenantState tenantState;
 
     @Column(name = "bpo_name")
     private String name;

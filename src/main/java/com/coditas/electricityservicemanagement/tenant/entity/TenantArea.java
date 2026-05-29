@@ -10,8 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "area")
-public class Area {
+@Table(name = "tenant_area")
+public class TenantArea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -25,4 +25,5 @@ public class Area {
 
     @Column(name = "pincode")
     private Integer pincode;
+
 }

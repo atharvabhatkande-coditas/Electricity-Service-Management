@@ -18,11 +18,11 @@ public class Complaint {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "cusromer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "cusromer_meter_id")
+    @JoinColumn(name = "customer_meter_id")
     private CustomerMeter customerMeter;
 
     @Column(name = "description")

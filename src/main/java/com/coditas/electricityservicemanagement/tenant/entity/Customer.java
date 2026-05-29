@@ -21,7 +21,7 @@ public class Customer {
     @JoinColumn(name = "user_id")
     private PlatformUsers user;
 
-    @Column(name = "cusromer_name")
+    @Column(name = "customer_name")
     private String name;
 
     @Column(name = "address")
@@ -29,19 +29,19 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "state_id")
-    private State state;
+    private TenantState tenantState;
 
     @ManyToOne
     @JoinColumn(name = "district_id")
-    private District district;
+    private TenantDistrict tenantDistrict;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    private City city;
+    private TenantCity tenantCity;
 
     @ManyToOne
     @JoinColumn(name = "area_id")
-    private Area area;
+    private TenantArea tenantArea;
 
     @Column(name = "pincode")
     private String pincode;

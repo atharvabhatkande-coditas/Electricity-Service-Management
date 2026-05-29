@@ -20,7 +20,7 @@ public class Bill {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "cusromer_meter_id")
+    @JoinColumn(name = "customer_meter_id")
     private CustomerMeter customerMeter;
 
     @ManyToOne

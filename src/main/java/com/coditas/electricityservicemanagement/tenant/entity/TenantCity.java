@@ -1,7 +1,6 @@
 package com.coditas.electricityservicemanagement.tenant.entity;
 
 import com.coditas.electricityservicemanagement.platform.entity.District;
-import com.coditas.electricityservicemanagement.platform.entity.PlatformUsers;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,8 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "city")
-public class City {
+@Table(name = "tenant_city")
+public class TenantCity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -24,7 +23,5 @@ public class City {
     @JoinColumn(name = "district_id")
     private District district;
 
-    @ManyToOne
-    @JoinColumn(name = "city_head_id")
-    private PlatformUsers cityHead;
+
 }

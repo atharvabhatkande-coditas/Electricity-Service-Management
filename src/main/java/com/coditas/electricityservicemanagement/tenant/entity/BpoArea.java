@@ -21,5 +21,5 @@ public class BpoArea {
 
     @ManyToOne
     @JoinColumn(name = "area_id")
-    private Area area;
+    private TenantArea tenantArea;
 }
