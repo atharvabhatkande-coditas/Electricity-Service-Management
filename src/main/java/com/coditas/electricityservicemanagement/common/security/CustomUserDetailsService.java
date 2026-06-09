@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -24,11 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @NullMarked
     public UserDetails loadUserByUsername(String username) {
         if(!Objects.equals(TenantContext.getCurrentSchema(),"public")){
-            return platformUserRepository.findByUsername(username)
+            return tenantUserRepository.findByUsername(username)
                     .orElseThrow(()->new NotFoundException(USER_NOT_FOUND));
         }
         else{
-            return tenantUserRepository.findByUsername(username)
+            return platformUserRepository.findByUsername(username)
                     .orElseThrow(()->new NotFoundException(USER_NOT_FOUND));
         }
 

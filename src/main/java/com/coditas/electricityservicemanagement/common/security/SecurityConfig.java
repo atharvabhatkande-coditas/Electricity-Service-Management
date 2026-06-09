@@ -2,6 +2,7 @@ package com.coditas.electricityservicemanagement.common.security;
 
 import com.coditas.electricityservicemanagement.common.filter.JwtFilter;
 
+import com.coditas.electricityservicemanagement.platform.enums.RoleType;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.coditas.electricityservicemanagement.common.constants.EndPoints.AUTH;
+import static com.coditas.electricityservicemanagement.common.constants.EndPoints.TENANT;
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -28,7 +32,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers(AUTH).permitAll()
+
+                        //sales
+                        .requestMatchers(TENANT).hasRole(RoleType.SALES.name())
+
+
+                        .anyRequest().authenticated()
 
                 )
                 .exceptionHandling(ex ->

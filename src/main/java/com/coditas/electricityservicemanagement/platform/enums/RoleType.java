@@ -10,5 +10,6 @@ public enum RoleType {
     TECHNICIAN,
     BILLER,
     CRM_AGENT,
-    CUSTOMER
+    CUSTOMER,
+    POC
 }

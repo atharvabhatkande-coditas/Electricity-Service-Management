@@ -8,7 +8,6 @@ import com.coditas.electricityservicemanagement.platform.dto.response.Applicatio
 import com.coditas.electricityservicemanagement.platform.dto.response.ErrorResponse;
 import com.coditas.electricityservicemanagement.common.exception.NotFoundException;
 import com.coditas.electricityservicemanagement.platform.service.PlatformUserService;
-import com.coditas.electricityservicemanagement.tenant.service.TenantUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -34,7 +33,6 @@ import static com.coditas.electricityservicemanagement.platform.constants.AuthCo
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
-    private final PlatformUserService platformUserService;
     private final ObjectMapper objectMapper;
     private final TenantSchemaResolver tenantSchemaResolver;
     private final CustomUserDetailsService  customUserDetailsService;
@@ -46,6 +44,15 @@ public class JwtFilter extends OncePerRequestFilter {
         String username=null;
         String token=null;
         String tenantId=null;
+
+        String headerTenantId=request.getHeader("X-TENANT-NAME");
+        if(headerTenantId==null || headerTenantId.isBlank()){
+            TenantContext.setCurrentSchema("public");
+        }else{
+            TenantContext.setCurrentTenant(headerTenantId);
+            String schemaName=tenantSchemaResolver.getTenantSchema(headerTenantId);
+            TenantContext.setCurrentSchema(schemaName);
+        }
 
         if(header!=null && header.startsWith("Bearer ")){
             token=header.substring(7);

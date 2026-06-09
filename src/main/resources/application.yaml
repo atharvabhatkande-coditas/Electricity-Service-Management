@@ -1,6 +1,21 @@
 spring:
   application:
     name: electricity-service-management
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: atharva.bhatkande@coditas.com
+    password: "jgck tgxy vxej xwsl"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+            checkserveridentity: false
   datasource:
     url: jdbc:postgresql://localhost:5432/electricity
     username: postgres
@@ -49,4 +64,6 @@ jwt:
   accessExpiration: 600000000
   refreshExpiration: 360000000
   secret: this-is-my-secret-key-to-ppo-in-coditas@#$%^&*765432
+
+
 
