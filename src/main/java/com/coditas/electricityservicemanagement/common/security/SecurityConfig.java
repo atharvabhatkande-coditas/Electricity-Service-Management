@@ -45,6 +45,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,CITY_MANAGEMENT).hasRole(RoleType.MANAGEMENT.name())
 
 
+                        .requestMatchers(HttpMethod.POST,PORTFOLIO).hasRole(RoleType.MANAGEMENT.name())
+                        .requestMatchers(HttpMethod.PATCH,PORTFOLIO).hasRole(RoleType.MANAGEMENT.name())
+
+
                         //stateHead
                         .requestMatchers(HttpMethod.GET,STATE_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
                         .requestMatchers(HttpMethod.POST,DISTRICT).hasRole(RoleType.STATE_HEAD.name())
@@ -70,6 +74,7 @@ public class SecurityConfig {
 
                         //sales
                         .requestMatchers(TENANT).hasRole(RoleType.SALES.name())
+                        .requestMatchers(HttpMethod.GET,PORTFOLIO).hasRole(RoleType.SALES.name())
                         .anyRequest().authenticated()
 
 

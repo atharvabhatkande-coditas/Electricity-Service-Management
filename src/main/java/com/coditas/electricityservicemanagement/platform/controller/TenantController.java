@@ -42,7 +42,7 @@ public class TenantController {
     }
 
     @PatchMapping("/{tenantId}")
-    public ResponseEntity<ApplicationResponse<UpdateResponse>> updateTenantData( @PathVariable String tenantId, @RequestBody TenantUpdateRequest tenantUpdateRequest){
+    public ResponseEntity<ApplicationResponse<UpdateResponse>> updateTenantData( @PathVariable String tenantId,@Valid @RequestBody TenantUpdateRequest tenantUpdateRequest){
         ApplicationResponse<UpdateResponse>applicationResponse=new ApplicationResponse<>(tenantService.updateTenantData(tenantId,tenantUpdateRequest));
         return  ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
     }

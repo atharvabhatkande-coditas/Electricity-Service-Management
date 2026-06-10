@@ -25,4 +25,10 @@ public class TenantBilling {
     @Enumerated(EnumType.STRING)
     @Column(name = "billing_status")
     private BillingStatus billingStatus;
+    @Column(name = "billing_date")
+    private LocalDateTime billingDate;
+
+    @ManyToOne
+    @JoinColumn(name = "tenant_id")
+    private Tenant tenant;
 }

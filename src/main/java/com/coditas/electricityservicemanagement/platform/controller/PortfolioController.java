@@ -7,6 +7,7 @@ import com.coditas.electricityservicemanagement.platform.dto.response.Applicatio
 import com.coditas.electricityservicemanagement.platform.dto.response.PortfolioResponse;
 import com.coditas.electricityservicemanagement.platform.entity.PlatformUsers;
 import com.coditas.electricityservicemanagement.platform.service.PortfolioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class PortfolioController {
     private final PortfolioService portfolioService;
 
     @PostMapping
-    public ResponseEntity<ApplicationResponse<SingleResponse>>assignPortfolio(@RequestBody PortfolioAssignRequest portfolioAssignRequest, @AuthenticationPrincipal PlatformUsers assignedBy){
+    public ResponseEntity<ApplicationResponse<SingleResponse>>assignPortfolio(@Valid @RequestBody PortfolioAssignRequest portfolioAssignRequest, @AuthenticationPrincipal PlatformUsers assignedBy){
         ApplicationResponse<SingleResponse>applicationResponse=new ApplicationResponse<>(portfolioService.assignPortfolio(portfolioAssignRequest,assignedBy));
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
 
@@ -42,7 +43,7 @@ public class PortfolioController {
     }
 
     @PatchMapping("/{portfolioId}")
-    public ResponseEntity<ApplicationResponse<SingleResponse>>updatePortfolio(@PathVariable Long portfolioId, @RequestBody PortfolioUpdateRequest portfolioUpdateRequest){
+    public ResponseEntity<ApplicationResponse<SingleResponse>>updatePortfolio(@PathVariable Long portfolioId,@Valid @RequestBody PortfolioUpdateRequest portfolioUpdateRequest){
         ApplicationResponse<SingleResponse>applicationResponse=new ApplicationResponse<>(portfolioService.updatePortfolio(portfolioId,portfolioUpdateRequest));
         return ResponseEntity.status(HttpStatus.OK).body(applicationResponse);
 

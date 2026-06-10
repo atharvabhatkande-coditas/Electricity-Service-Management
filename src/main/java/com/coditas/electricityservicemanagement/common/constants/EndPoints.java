@@ -33,6 +33,10 @@ public final class EndPoints {
     public static final String CITY_DISTRICT_HEAD="/platform/district/state/**";
 
 
+    public static final String PORTFOLIO="/platform/portfolio/**";
+
+
+
 
 
 
