@@ -9,9 +9,7 @@ import com.coditas.electricityservicemanagement.platform.dto.response.UpdateResp
 import com.coditas.electricityservicemanagement.platform.entity.PlatformUsers;
 import com.coditas.electricityservicemanagement.platform.service.TenantService;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -32,9 +30,9 @@ public class TenantController {
         return  ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
     }
 
-    @GetMapping()
-    public ResponseEntity<ApplicationResponse<List<TenantResponse>>> getAllTenants(@AuthenticationPrincipal PlatformUsers platformUser){
-        ApplicationResponse<List<TenantResponse>>applicationResponse=new ApplicationResponse<>(tenantService.getAllTenants(platformUser));
+    @GetMapping("/page/{pageNo}")
+    public ResponseEntity<ApplicationResponse<List<TenantResponse>>> getAllTenants(@AuthenticationPrincipal PlatformUsers platformUser,@PathVariable int pageNo){
+        ApplicationResponse<List<TenantResponse>>applicationResponse=new ApplicationResponse<>(tenantService.getAllTenants(platformUser,pageNo));
         return  ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
     }
     @GetMapping("/{tenantId}")

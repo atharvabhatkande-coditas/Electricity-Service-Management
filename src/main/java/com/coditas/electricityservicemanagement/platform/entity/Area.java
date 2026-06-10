@@ -13,7 +13,7 @@ import lombok.*;
 public class Area {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "area_name")
     private String name;

@@ -14,7 +14,7 @@ import lombok.*;
 public class TenantCity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "city_name")
     private String name;

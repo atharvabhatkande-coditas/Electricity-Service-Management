@@ -12,12 +12,14 @@ import com.coditas.electricityservicemanagement.platform.dto.response.TenantResp
 import com.coditas.electricityservicemanagement.platform.dto.response.UpdateResponse;
 import com.coditas.electricityservicemanagement.platform.entity.PlatformUsers;
 import com.coditas.electricityservicemanagement.platform.entity.Tenant;
+import com.coditas.electricityservicemanagement.platform.enums.RoleType;
 import com.coditas.electricityservicemanagement.platform.mappers.TenantMapper;
 import com.coditas.electricityservicemanagement.platform.repository.TenantRepository;
-import com.coditas.electricityservicemanagement.tenant.enums.RoleType;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.flywaydb.core.Flyway;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -86,8 +88,12 @@ public class TenantService {
 
     }
 
-    public List<TenantResponse> getAllTenants(PlatformUsers platformUser) {
-        return null;
+    public List<TenantResponse> getAllTenants(PlatformUsers platformUser,int pageNo) {
+        Pageable pageable= PageRequest.of(pageNo,100);
+       return tenantRepository.findAll(pageable)
+               .stream()
+               .map(tenant -> tenantMapper.getALlToDto(tenant,platformUser))
+               .toList();
     }
 
     public TenantResponse getTenant(String tenantId, PlatformUsers platformUser) {

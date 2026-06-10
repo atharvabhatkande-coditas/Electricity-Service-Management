@@ -13,7 +13,7 @@ import lombok.*;
 public class CustomerMeterConnection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

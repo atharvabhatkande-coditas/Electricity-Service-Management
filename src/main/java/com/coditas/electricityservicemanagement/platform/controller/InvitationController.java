@@ -23,10 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class InvitationController {
     private final InvitationService invitationService;
 
-    @PostMapping("/poc")
-    public ResponseEntity<ApplicationResponse<InvitationResponse>> sendInvitationToTenantPoc(@Valid @RequestBody InvitationRequest invitationRequest, @AuthenticationPrincipal PlatformUsers platformUser){
-        ApplicationResponse<InvitationResponse>applicationResponse=new ApplicationResponse<>(invitationService.sendInvitationToTenantPoc(invitationRequest,platformUser));
+    @PostMapping()
+    public ResponseEntity<ApplicationResponse<InvitationResponse>> sendInvitation(@Valid @RequestBody InvitationRequest invitationRequest, @AuthenticationPrincipal PlatformUsers invitedBy){
+        ApplicationResponse<InvitationResponse>applicationResponse=new ApplicationResponse<>(invitationService.sendInvitation(invitationRequest,invitedBy));
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
     }
+
+
+
+
+
+
 
 }

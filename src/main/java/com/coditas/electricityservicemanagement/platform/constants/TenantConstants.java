@@ -10,4 +10,12 @@ public final class TenantConstants {
     public static final String ALREADY_EXISTS=" Already Exist";
     public static final String TENANT_ONBOARDED=" Tenant Onboarded Successfully";
     public static final String TENANT_UPDATED=" Tenant Data Updated Successfully";
+
+
+
+
+    public static final String PORTFOLIO="Portfolio";
+    public static final String PORTFOLIO_ALREADY_ASSIGNED=" Tenant Portfolio Already assigned";
+    public static final String PORTFOLIO_ASSIGNED=" Tenant Portfolio assigned Successfully";
+    public static final String PORTFOLIO_UPDATED="Portfolio updated Successfully";
 }

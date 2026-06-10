@@ -5,6 +5,7 @@ import com.coditas.electricityservicemanagement.common.dto.request.InvitationReq
 import com.coditas.electricityservicemanagement.platform.dto.response.InvitationResponse;
 import com.coditas.electricityservicemanagement.platform.entity.Invitation;
 import com.coditas.electricityservicemanagement.platform.entity.PlatformUsers;
+import com.coditas.electricityservicemanagement.platform.enums.RoleType;
 import com.coditas.electricityservicemanagement.platform.repository.PocInvitationRepository;
 import com.coditas.electricityservicemanagement.platform.repository.PlatformUserRepository;
 import jakarta.transaction.Transactional;
@@ -19,6 +20,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 import static com.coditas.electricityservicemanagement.platform.constants.AuthConstants.*;
+import static com.coditas.electricityservicemanagement.platform.enums.RoleType.getHighestPriorityRole;
 
 @Service
 @RequiredArgsConstructor
@@ -30,17 +32,23 @@ public class InvitationService {
     private String senderEmail;
 
     @Transactional
-    public InvitationResponse sendInvitationToTenantPoc(@Valid InvitationRequest invitationRequest, PlatformUsers platformUser) {
-
+    public InvitationResponse sendInvitation( InvitationRequest invitationRequest, PlatformUsers platformUser) {
         PlatformUsers invitedBy=platformUserRepository.findByUsername(platformUser.getUsername())
                 .orElseThrow(()->new AuthenticationException(USER_NOT_FOUND));
+
+        RoleType highestRole=getHighestPriorityRole(invitedBy.getRoles());
+
+        if(checkInviteAuthority(highestRole,invitationRequest.getRole())){
+            throw new AuthenticationException(UNAUTHORIZED);
+        }
 
         UUID code=UUID.randomUUID();
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
         simpleMailMessage.setSubject("Invitation Link");
         simpleMailMessage.setTo(invitationRequest.getEmail());
         simpleMailMessage.setFrom(senderEmail);
-        simpleMailMessage.setText(String.format(EMAIL_TEXT,INVITATION_LINK,code));
+        simpleMailMessage.setText(String.format(EMAIL_TEXT,INVITATION_LINK_PLATFORM,code));
+        javaMailSender.send(simpleMailMessage);
 
         Invitation invitation = Invitation.builder()
                 .email(invitationRequest.getEmail())
@@ -50,8 +58,6 @@ public class InvitationService {
                 .invitedBy(invitedBy)
                 .role(invitationRequest.getRole())
                 .build();
-
-        javaMailSender.send(simpleMailMessage);
         pocInvitationRepository.save(invitation);
         return InvitationResponse.builder()
                 .message(EMAIL_SENT)
@@ -59,9 +65,8 @@ public class InvitationService {
 
     }
 
-
-    private String sendMail(String recipient){
-
+    private boolean checkInviteAuthority(RoleType highestRole,RoleType invitedRole){
+        return highestRole.getValue() > invitedRole.getValue();
     }
 
 

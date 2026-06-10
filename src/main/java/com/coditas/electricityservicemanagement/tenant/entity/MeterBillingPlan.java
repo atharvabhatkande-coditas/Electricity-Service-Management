@@ -13,7 +13,7 @@ import lombok.*;
 public class MeterBillingPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "meter_type_id")

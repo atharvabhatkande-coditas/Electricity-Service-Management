@@ -4,6 +4,9 @@ public final class AuthConstants {
     private AuthConstants(){
 
     }
+
+    public static final String STATE_HEAD_NOT_FOUND="State head not found";
+    public static final String DISTRICT_HEAD_NOT_FOUND="District head not found";
     public static final String USER_NOT_FOUND="User not found";
     public static final String USER_EXIST="User Already Exist";
     public static final String UNAUTHORIZED="Unauthorized";
@@ -20,7 +23,7 @@ public final class AuthConstants {
             
             Your Invitation Code: %s
             """;
-    public static final String INVITATION_LINK="https://coming-revivable-scandal.ngrok-free.dev/electrohub/v1/auth/platform-register";
+    public static final String INVITATION_LINK_PLATFORM="https://coming-revivable-scandal.ngrok-free.dev/electrohub/v1/platform/auth/register";
     public static final String EMAIL_SENT="Invitation Sent Successfully";
 
 }

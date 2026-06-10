@@ -13,7 +13,7 @@ import lombok.*;
 public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "state_name")
     private String name;
