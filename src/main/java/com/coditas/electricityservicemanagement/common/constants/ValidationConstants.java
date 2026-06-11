@@ -28,6 +28,9 @@ public final  class ValidationConstants {
     public static final String CITY_CREATED="City created";
     public static final String CITY_HEAD_ASSIGNED="City head assigned successfully";
 
+    public static final String AREA="Area";
+    public static final String AREA_CREATED="Area created";
+
 
 
 

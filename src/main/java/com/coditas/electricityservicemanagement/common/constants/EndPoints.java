@@ -36,6 +36,13 @@ public final class EndPoints {
     public static final String PORTFOLIO="/platform/portfolio/**";
 
 
+    public static final String AREA="/platform/area/**";
+    public static final String AREA_CITY_HEAD="/platform/area/city/**";
+    public static final String AREA_DISTRICT_HEAD="/platform/area/district/**";
+    public static final String AREA_STATE_HEAD="/platform/area/state/**";
+    public static final String AREA_MANAGEMENT="/platform/area/page/**";
+
+
 
 
 

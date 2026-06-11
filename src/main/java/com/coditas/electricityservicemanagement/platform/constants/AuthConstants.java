@@ -17,6 +17,9 @@ public final class AuthConstants {
     public static final String LOGOUT="Logged Out Successfully";
 
 
+    public static final String BAD_CREDENTIALS="Bad Credentials";
+
+
 
     public static final String EMAIL_TEXT= """
             Your Invitation Link: %s

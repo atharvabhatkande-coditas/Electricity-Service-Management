@@ -62,7 +62,7 @@ public class AuthService {
             return jwtUtil.generatePlatformTokens(platformUser);
 
         }catch (Exception e){
-            throw new AuthenticationException(LOGIN_FAILURE);
+            throw new AuthenticationException(BAD_CREDENTIALS);
         }
 
     }
