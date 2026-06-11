@@ -52,7 +52,7 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.OK).body(applicationResponse);
     }
 
-    @PostMapping("/{cityId}/assign/city-head")
+    @PatchMapping("/{cityId}/assign/city-head")
     public ResponseEntity<ApplicationResponse<SingleResponse>>assignCityHead(@PathVariable Long cityId , @Valid @RequestBody CityHeadAssignRequest cityHeadAssignRequest, @AuthenticationPrincipal PlatformUsers districtHead){
         ApplicationResponse<SingleResponse>applicationResponse=new ApplicationResponse<>(cityService.assignCityHead(cityHeadAssignRequest,cityId,districtHead));
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);

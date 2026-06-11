@@ -40,7 +40,7 @@ public class StateController {
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
     }
 
-    @PostMapping("/{stateId}/assign/state-head")
+    @PatchMapping("/{stateId}/assign/state-head")
     public ResponseEntity<ApplicationResponse<SingleResponse>>assignStateHead(@PathVariable Long stateId , @Valid @RequestBody StateHeadAssignRequest stateHeadAssignRequest){
         ApplicationResponse<SingleResponse>applicationResponse=new ApplicationResponse<>(stateService.assignStateHead(stateHeadAssignRequest,stateId));
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);

@@ -17,14 +17,16 @@ public class ServiceArea {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private PlatformUsers user;
+    @JoinColumn(name = "technician_id")
+    private PlatformUsers technician;
+
+    @ManyToOne
+    @JoinColumn(name = "biller_id")
+    private PlatformUsers biller;
 
     @ManyToOne
     @JoinColumn(name = "area_id")
     private Area area;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "service_type")
-    private ServiceType serviceType;
+
 }

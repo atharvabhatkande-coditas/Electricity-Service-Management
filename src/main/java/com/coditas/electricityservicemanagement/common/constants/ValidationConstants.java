@@ -31,6 +31,17 @@ public final  class ValidationConstants {
     public static final String AREA="Area";
     public static final String AREA_CREATED="Area created";
 
+    public static final String SERVICE_AREA="Service Area";
+    public static final String SERVICE_AREA_CREATED="Service Area Created Successfully";
+
+
+
+    public static final String TECHNICIAN_NOT_FOUND="Technician Not Found";
+    public static final String TECHNICIAN_ASSIGNED="Technician Assigned";
+
+    public static final String BILLER_NOT_FOUND="Biller Not Found";
+    public static final String BILLER_ASSIGNED="Biller Assigned";
+
 
 
 

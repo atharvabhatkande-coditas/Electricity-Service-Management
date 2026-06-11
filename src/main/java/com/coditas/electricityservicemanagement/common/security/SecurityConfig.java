@@ -38,6 +38,7 @@ public class SecurityConfig {
 
                         //management
                         .requestMatchers(HttpMethod.POST,STATE).hasRole(RoleType.MANAGEMENT.name())
+                        .requestMatchers(HttpMethod.PATCH,STATE).hasRole(RoleType.MANAGEMENT.name())
                         .requestMatchers(HttpMethod.GET,STATE_MANAGEMENT).hasRole(RoleType.MANAGEMENT.name())
 
                         .requestMatchers(HttpMethod.GET,DISTRICT_MANAGEMENT).hasRole(RoleType.MANAGEMENT.name())
@@ -53,6 +54,7 @@ public class SecurityConfig {
                         //stateHead
                         .requestMatchers(HttpMethod.GET,STATE_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
                         .requestMatchers(HttpMethod.POST,DISTRICT).hasRole(RoleType.STATE_HEAD.name())
+                        .requestMatchers(HttpMethod.PATCH,DISTRICT).hasRole(RoleType.STATE_HEAD.name())
                         .requestMatchers(HttpMethod.GET,DISTRICT_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
 
 
@@ -64,6 +66,7 @@ public class SecurityConfig {
                         //districtHead
                         .requestMatchers(HttpMethod.GET,DISTRICT).hasRole(RoleType.DISTRICT_HEAD.name())
                         .requestMatchers(HttpMethod.POST,CITY).hasRole(RoleType.DISTRICT_HEAD.name())
+                        .requestMatchers(HttpMethod.PATCH,CITY).hasRole(RoleType.DISTRICT_HEAD.name())
 
                         .requestMatchers(HttpMethod.GET,CITY_DISTRICT_HEAD).hasRole(RoleType.DISTRICT_HEAD.name())
 
@@ -73,6 +76,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,CITY).hasRole(RoleType.CITY_HEAD.name())
                         .requestMatchers(HttpMethod.POST,AREA).hasRole(RoleType.CITY_HEAD.name())
                         .requestMatchers(HttpMethod.GET,AREA_CITY_HEAD).hasRole(RoleType.CITY_HEAD.name())
+                        .requestMatchers(HttpMethod.GET,CITY).hasRole(RoleType.CITY_HEAD.name())
 
 
 

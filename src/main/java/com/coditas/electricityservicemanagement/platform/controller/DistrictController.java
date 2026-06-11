@@ -46,7 +46,7 @@ public class DistrictController {
         return ResponseEntity.status(HttpStatus.OK).body(applicationResponse);
     }
 
-    @PostMapping("/{districtId}/assign/district-head")
+    @PatchMapping("/{districtId}/assign/district-head")
     public ResponseEntity<ApplicationResponse<SingleResponse>>assignDistrictHead(@PathVariable Long districtId , @Valid @RequestBody DistrictHeadAssignRequest districtHeadAssignRequest, @AuthenticationPrincipal PlatformUsers stateHead){
         ApplicationResponse<SingleResponse>applicationResponse=new ApplicationResponse<>(districtService.assignDistrictHead(districtHeadAssignRequest,districtId,stateHead));
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
