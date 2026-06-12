@@ -23,8 +23,14 @@ import org.springframework.web.bind.annotation.*;
 public class TenantAuthController {
     private final TenantAuthService tenantAuthService;
 
+    @PostMapping("/register/poc")
+    public ResponseEntity<ApplicationResponse<TenantRegisterResponse>> registerTenantPoc(@Valid @RequestBody TenantRegisterRequest request){
+        ApplicationResponse<TenantRegisterResponse>applicationResponse=new ApplicationResponse<>(tenantAuthService.registerTenantPoc(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
+    }
+
     @PostMapping("/register")
-    public ResponseEntity<ApplicationResponse<TenantRegisterResponse>> registerUser(@Valid @RequestBody TenantRegisterRequest request){
+    public ResponseEntity<ApplicationResponse<TenantRegisterResponse>> registerTenantUser(@Valid @RequestBody TenantRegisterRequest request){
         ApplicationResponse<TenantRegisterResponse>applicationResponse=new ApplicationResponse<>(tenantAuthService.registerTenantUser(request));
         return ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
     }

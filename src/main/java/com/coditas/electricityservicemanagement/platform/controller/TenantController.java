@@ -47,4 +47,11 @@ public class TenantController {
         return  ResponseEntity.status(HttpStatus.CREATED).body(applicationResponse);
     }
 
+
+    @PostMapping("/update-schema")
+    public ResponseEntity<ApplicationResponse<SingleResponse>> updateSchema(){
+        ApplicationResponse<SingleResponse>applicationResponse=new ApplicationResponse<>(tenantService.updateSchema());
+        return  ResponseEntity.status(HttpStatus.OK).body(applicationResponse);
+    }
+
 }

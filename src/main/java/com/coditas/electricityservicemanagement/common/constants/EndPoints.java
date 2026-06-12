@@ -6,7 +6,6 @@ public final class EndPoints {
 
     }
 
-    public static final String AUTH_TENANT="/tenant/auth/**";
     public static final String AUTH="/platform/auth/**";
     public static final String SWAGGER1="/swagger-ui/**";
     public static final String SWAGGER2="/v3/api-docs/**";
@@ -14,6 +13,7 @@ public final class EndPoints {
 
 
     public static final String TENANT="/platform/tenant/**";
+    public static final String TENANT_MANAGEMENT="/platform/tenant/update-schema/**";
     public static final String INVITATION="/platform/invite/**";
 
 
@@ -43,9 +43,23 @@ public final class EndPoints {
     public static final String AREA_MANAGEMENT="/platform/area/page/**";
 
 
+    public static final String SERVICE_AREA="/platform/service-area/**";
+    public static final String SERVICE_AREA_CITY_HEAD="/platform/service-area/city/**";
+    public static final String SERVICE_AREA_DISTRICT_HEAD="/platform/service-area/district/**";
+    public static final String SERVICE_AREA_STATE_HEAD="/platform/service-area/state/**";
+    public static final String SERVICE_AREA_MANAGEMENT="/platform/service-area/page/**";
 
 
 
+
+//tenant
+
+    public static final String AUTH_TENANT="/tenant/auth/**";
+
+
+    public static final String INVITATION_TENANT="/tenant/invite/**";
+
+    public static final String METER_TYPE="/tenant/meter-type/**";
 
 
 }

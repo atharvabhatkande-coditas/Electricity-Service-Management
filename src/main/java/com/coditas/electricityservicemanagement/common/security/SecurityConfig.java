@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,STATE).hasRole(RoleType.MANAGEMENT.name())
                         .requestMatchers(HttpMethod.PATCH,STATE).hasRole(RoleType.MANAGEMENT.name())
                         .requestMatchers(HttpMethod.GET,STATE_MANAGEMENT).hasRole(RoleType.MANAGEMENT.name())
+                        .requestMatchers(HttpMethod.POST,TENANT_MANAGEMENT).hasRole(RoleType.MANAGEMENT.name())
 
                         .requestMatchers(HttpMethod.GET,DISTRICT_MANAGEMENT).hasRole(RoleType.MANAGEMENT.name())
 
@@ -49,18 +50,21 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.POST,PORTFOLIO).hasRole(RoleType.MANAGEMENT.name())
                         .requestMatchers(HttpMethod.PATCH,PORTFOLIO).hasRole(RoleType.MANAGEMENT.name())
+                        .requestMatchers(HttpMethod.GET,SERVICE_AREA_MANAGEMENT).hasRole(RoleType.MANAGEMENT.name())
 
 
                         //stateHead
                         .requestMatchers(HttpMethod.GET,STATE_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
                         .requestMatchers(HttpMethod.POST,DISTRICT).hasRole(RoleType.STATE_HEAD.name())
                         .requestMatchers(HttpMethod.PATCH,DISTRICT).hasRole(RoleType.STATE_HEAD.name())
-                        .requestMatchers(HttpMethod.GET,DISTRICT_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
+                        .requestMatchers(HttpMethod.GET,SERVICE_AREA_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
 
 
                         .requestMatchers(HttpMethod.GET,CITY_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
 
                         .requestMatchers(HttpMethod.GET,AREA_STATE_HEAD).hasRole(RoleType.STATE_HEAD.name())
+                        .requestMatchers(HttpMethod.GET,DISTRICT_STATE_HEAD).hasRole(RoleType.DISTRICT_HEAD.name())
+
 
 
                         //districtHead
@@ -71,12 +75,17 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,CITY_DISTRICT_HEAD).hasRole(RoleType.DISTRICT_HEAD.name())
 
                         .requestMatchers(HttpMethod.GET,AREA_DISTRICT_HEAD).hasRole(RoleType.DISTRICT_HEAD.name())
+                        .requestMatchers(HttpMethod.GET,SERVICE_AREA_DISTRICT_HEAD).hasRole(RoleType.DISTRICT_HEAD.name())
 
                         //cityHead
                         .requestMatchers(HttpMethod.GET,CITY).hasRole(RoleType.CITY_HEAD.name())
                         .requestMatchers(HttpMethod.POST,AREA).hasRole(RoleType.CITY_HEAD.name())
                         .requestMatchers(HttpMethod.GET,AREA_CITY_HEAD).hasRole(RoleType.CITY_HEAD.name())
                         .requestMatchers(HttpMethod.GET,CITY).hasRole(RoleType.CITY_HEAD.name())
+                        .requestMatchers(HttpMethod.POST,SERVICE_AREA).hasRole(RoleType.CITY_HEAD.name())
+                        .requestMatchers(HttpMethod.PATCH,SERVICE_AREA).hasRole(RoleType.CITY_HEAD.name())
+                        .requestMatchers(HttpMethod.GET,SERVICE_AREA).hasRole(RoleType.CITY_HEAD.name())
+                        .requestMatchers(HttpMethod.GET,SERVICE_AREA_CITY_HEAD).hasRole(RoleType.CITY_HEAD.name())
 
 
 
@@ -86,6 +95,29 @@ public class SecurityConfig {
                         //sales
                         .requestMatchers(TENANT).hasRole(RoleType.SALES.name())
                         .requestMatchers(HttpMethod.GET,PORTFOLIO).hasRole(RoleType.SALES.name())
+
+
+
+                        //tenant
+                        .requestMatchers(INVITATION_TENANT).hasRole(com.coditas.electricityservicemanagement.tenant.enums.RoleType.OPERATIONAL_HEAD.name())
+
+                        .requestMatchers(METER_TYPE).hasRole(com.coditas.electricityservicemanagement.tenant.enums.RoleType.OPERATIONAL_HEAD.name())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         .anyRequest().authenticated()
 
 

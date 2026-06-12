@@ -119,4 +119,32 @@ public class TenantService {
                 .message(TENANT_UPDATED)
                 .build();
     }
+
+    public SingleResponse updateSchema() {
+
+        List<Tenant>tenants=tenantRepository.findAll();
+
+        tenants.forEach(tenant -> {
+
+            final String schemaName =tenant.getSchemaName();
+
+
+            //run migration
+            Flyway flyway = Flyway.configure()
+                    .dataSource(dataSource)
+                    .schemas(schemaName)
+                    .locations("classpath:db/migration/tenant")
+                    .baselineOnMigrate(true)
+                    .table("flyway_schema_history")
+                    .validateOnMigrate(true)
+                    .cleanDisabled(true)
+                    .load();
+
+            flyway.migrate();
+
+        });
+        return SingleResponse.builder()
+                .message(TENANT_SCHEMA_UPDATED)
+                .build();
+    }
 }

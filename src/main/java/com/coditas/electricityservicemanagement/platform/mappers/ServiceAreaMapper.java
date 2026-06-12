@@ -59,4 +59,14 @@ public class ServiceAreaMapper {
                 .districts(districtCityServiceAreaResponseList)
                 .build();
     }
+
+    public List<StateDistrictCityServiceAreaResponse>stateDistrictCityServiceAreaResponseList(List<ServiceArea>serviceAreaList){
+
+       Map<Long,List<ServiceArea>>stateServiceAreas=serviceAreaList.stream().collect(Collectors.groupingBy(serviceArea -> serviceArea.getArea().getCity().getDistrict().getState().getId()));
+
+       return stateServiceAreas.values()
+               .stream()
+               .map(this::stateDistrictCityServiceAreaResponse)
+               .toList();
+    }
 }

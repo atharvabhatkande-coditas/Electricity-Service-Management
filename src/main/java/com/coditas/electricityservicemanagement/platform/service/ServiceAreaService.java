@@ -164,4 +164,14 @@ public class ServiceAreaService {
 
         return serviceAreaMapper.stateDistrictCityServiceAreaResponse(serviceAreas.getContent());
     }
+
+    public List<StateDistrictCityServiceAreaResponse> getServiceAreaOfAllState(int pageNo) {
+        Pageable pageable= PageRequest.of(pageNo,5);
+        Page<State>states=stateRepository.findAll(pageable);
+        Page<District>districts=districtRepository.findByStateIn(states.getContent(),pageable);
+        Page<City>cities=cityRepository.findByDistrictIn(districts.getContent(),pageable);
+        Page<Area>areas=areaRepository.findByCityIn(cities.getContent(),pageable);
+        Page<ServiceArea>serviceAreas=serviceAreaRepository.findByAreaIn(areas.getContent(),pageable);
+        return serviceAreaMapper.stateDistrictCityServiceAreaResponseList(serviceAreas.getContent());
+    }
 }

@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/platform/service-area")
@@ -53,6 +55,12 @@ public class ServiceAreaController {
     @GetMapping("/state/{stateId}/page/{pageNo}")
     public ResponseEntity<ApplicationResponse<StateDistrictCityServiceAreaResponse>> getServiceAreaOfState(@PathVariable Long stateId, @AuthenticationPrincipal PlatformUsers platformUser, @PathVariable int pageNo){
         ApplicationResponse<StateDistrictCityServiceAreaResponse>applicationResponse=new ApplicationResponse<>(serviceAreaService.getServiceAreaOfState(stateId,platformUser,pageNo));
+        return ResponseEntity.status(HttpStatus.OK).body(applicationResponse);
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public ResponseEntity<ApplicationResponse<List<StateDistrictCityServiceAreaResponse>>> getServiceAreaOfAllState(@PathVariable int pageNo){
+        ApplicationResponse<List<StateDistrictCityServiceAreaResponse>>applicationResponse=new ApplicationResponse<>(serviceAreaService.getServiceAreaOfAllState(pageNo));
         return ResponseEntity.status(HttpStatus.OK).body(applicationResponse);
     }
 

@@ -17,7 +17,7 @@ public class MeterBillingPlan {
 
     @ManyToOne
     @JoinColumn(name = "meter_type_id")
-    private MeterType meter;
+    private MeterType meterType;
 
     @Column(name = "rate_per_unit")
     private double ratePerUnit;
@@ -29,7 +29,7 @@ public class MeterBillingPlan {
     private int photosRequired;
 
     @Column(name = "photos_interval")
-    private int photos_interval;
+    private int photosInterval;
 
 
 }

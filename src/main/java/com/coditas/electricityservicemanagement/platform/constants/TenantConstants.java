@@ -10,6 +10,7 @@ public final class TenantConstants {
     public static final String ALREADY_EXISTS=" Already Exist";
     public static final String TENANT_ONBOARDED=" Tenant Onboarded Successfully";
     public static final String TENANT_UPDATED=" Tenant Data Updated Successfully";
+    public static final String TENANT_SCHEMA_UPDATED=" Tenant Schema Updated Successfully";
 
 
 

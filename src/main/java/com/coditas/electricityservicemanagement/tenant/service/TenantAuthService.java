@@ -9,15 +9,16 @@ import com.coditas.electricityservicemanagement.platform.dto.response.AccessToke
 import com.coditas.electricityservicemanagement.platform.dto.response.LoginResponseTokens;
 import com.coditas.electricityservicemanagement.platform.dto.response.LogoutResponse;
 import com.coditas.electricityservicemanagement.platform.entity.Invitation;
-import com.coditas.electricityservicemanagement.platform.entity.PlatformUsers;
 import com.coditas.electricityservicemanagement.platform.entity.TenantRefreshToken;
 import com.coditas.electricityservicemanagement.platform.repository.InvitationRepository;
 import com.coditas.electricityservicemanagement.platform.repository.TenantRefreshTokenRepository;
 import com.coditas.electricityservicemanagement.tenant.dto.request.TenantRegisterRequest;
 import com.coditas.electricityservicemanagement.tenant.dto.response.TenantRegisterResponse;
+import com.coditas.electricityservicemanagement.tenant.entity.TenantInvitation;
 import com.coditas.electricityservicemanagement.tenant.entity.TenantUsers;
 import com.coditas.electricityservicemanagement.tenant.enums.RoleType;
 
+import com.coditas.electricityservicemanagement.tenant.repository.TenantInvitationRepository;
 import com.coditas.electricityservicemanagement.tenant.repository.TenantUserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -45,10 +46,11 @@ public class TenantAuthService {
     private final AuthenticationManager authenticationManager;
     private final TenantRefreshTokenRepository tenantRefreshTokenRepository;
     private final JwtUtil jwtUtil;
+    private final TenantInvitationRepository tenantInvitationRepository;
     @Value("${jwt.accessExpiration}")
     private long accessExpiration;
 
-    public TenantRegisterResponse registerTenantUser(TenantRegisterRequest request) {
+    public TenantRegisterResponse registerTenantPoc(TenantRegisterRequest request) {
         TenantUsers tenantUser=tenantUserRepository.findByUsername(request.getUsername())
                 .orElse(null);
 
@@ -81,6 +83,38 @@ public class TenantAuthService {
                 .build();
     }
 
+    public TenantRegisterResponse registerTenantUser(TenantRegisterRequest request) {
+        TenantUsers tenantUser=tenantUserRepository.findByUsername(request.getUsername())
+                .orElse(null);
+
+        if(!Objects.isNull(tenantUser)){
+            throw new AuthenticationException(USER_EXIST);
+        }
+
+        TenantInvitation invitation=tenantInvitationRepository.findByEmailAndCode(request.getUsername(),request.getCode())
+                .orElseThrow(()->new AuthenticationException(VERIFY_CODE));
+        if(!Objects.equals(invitation.getCode(),request.getCode())){
+            throw new AuthenticationException(VERIFY_CODE);
+        }
+        if(invitation.getExpireAt().isBefore(Instant.now())){
+            throw new AuthenticationException(VERIFY_CODE);
+        }
+
+        TenantUsers user=TenantUsers.builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .isEnabled(true)
+                .roles(getALlRoles(invitation.getRole().name()))
+                .build();
+        tenantUserRepository.save(user);
+
+        return TenantRegisterResponse.builder()
+                .message(REGISTRATION_SUCCESS)
+                .build();
+    }
+
+
+
     public LoginResponseTokens loginTenantUser(LoginRequest request) {
         try{
             Authentication authentication=authenticationManager
@@ -94,7 +128,7 @@ public class TenantAuthService {
             return jwtUtil.generateTenantTokens(tenantUser,TenantContext.getCurrentTenant());
 
         }catch (Exception e){
-            throw new AuthenticationException(LOGIN_FAILURE);
+            throw new AuthenticationException(BAD_CREDENTIALS);
         }
 
     }

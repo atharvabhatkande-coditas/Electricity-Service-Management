@@ -27,6 +27,7 @@ public final class AuthConstants {
             Your Invitation Code: %s
             """;
     public static final String INVITATION_LINK_PLATFORM="https://coming-revivable-scandal.ngrok-free.dev/electrohub/v1/platform/auth/register";
+    public static final String INVITATION_LINK_TENANT="https://coming-revivable-scandal.ngrok-free.dev/electrohub/v1/tenant/auth/register";
     public static final String EMAIL_SENT="Invitation Sent Successfully";
 
 }
